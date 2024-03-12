@@ -10,7 +10,7 @@ import android.provider.MediaStore;
 import android.os.Bundle;
 
 import android.widget.Toast;
-import androidx.preference.Preference;
+import androidx.preference.*;
 
 import com.kdt.pickafile.FileListView;
 import net.kdt.pojavlaunch.R;
@@ -46,6 +46,14 @@ public class LauncherPreferenceMiscellaneousFragment extends LauncherPreferenceF
             Toast.makeText(getContext(), R.string.notif_mouse1, Toast.LENGTH_SHORT).show();
             return true;
         });
+
+        ListPreference CLStorageLP = requirePreference("CLStorageL", ListPreference.class);
+        Tools.CStorageList clstoragelList = Tools.getCompatibleCStorageL(getContext());
+        String LCStorageL = clstoragelList.CStorageLIds.get(0);
+        CLStorageLP.setEntries(clstoragelList.CStorageL);
+        CLStorageLP.setEntryValues(clstoragelList.CStorageLIds.toArray(new String[0]));
+        Tools.LOCAL_CSTL = LCStorageL;
+
     }
     @Override
     public void onActivityResult(
